@@ -4,10 +4,15 @@ using UnityEngine;
 
 public static class Difficulty
 {
-   [SerializeField]private static float SecondsToMaxDificulty = 60;
-
+   private static float SecondsToMaxDificulty = 60;
+   private static float levelStartTime;
    public static float GetDificultyPercent()
    {
-      return Mathf.Clamp01(Time.time / SecondsToMaxDificulty);
+      return Mathf.Clamp01(levelStartTime / SecondsToMaxDificulty);
+   }
+
+   public static void SetLevelStartTime()
+   {
+      levelStartTime = Time.time;
    }
 }

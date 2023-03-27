@@ -23,16 +23,20 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time>nextSpawnTime)
+        if (GameController.Instance.isGameActive)
         {
-            float secondsBetweenSpawns = Mathf.Lerp(secondsBetweenSpawnsMinMax.y, secondsBetweenSpawnsMinMax.x,Difficulty.GetDificultyPercent());
-            nextSpawnTime = Time.time + secondsBetweenSpawns;
-            float spawnSize = Random.Range(SpawnSizeMinMax.x, SpawnSizeMinMax.y);
-            Vector2 spawnPosition = new Vector2(Random.Range(-_screenHalfWidth.x, _screenHalfWidth.x),_screenHalfWidth.y+spawnSize/2);
-            var obj = PoolController.Instance.GetFallingObject();//Instantiate(_prefab, spawnPosition, quaternion.identity);
-            obj.transform.position = spawnPosition;
-            obj.transform.localScale = Vector2.one * spawnSize;
-            obj.SetActive(true);
+            if (Time.time>nextSpawnTime)
+            {
+                float secondsBetweenSpawns = Mathf.Lerp(secondsBetweenSpawnsMinMax.y, secondsBetweenSpawnsMinMax.x,Difficulty.GetDificultyPercent());
+                nextSpawnTime = Time.time + secondsBetweenSpawns;
+                float spawnSize = Random.Range(SpawnSizeMinMax.x, SpawnSizeMinMax.y);
+                Vector2 spawnPosition = new Vector2(Random.Range(-_screenHalfWidth.x, _screenHalfWidth.x),_screenHalfWidth.y+spawnSize/2);
+                var obj = PoolController.Instance.GetFallingObject();//Instantiate(_prefab, spawnPosition, quaternion.identity);
+                obj.transform.position = spawnPosition;
+                obj.transform.localScale = Vector2.one * spawnSize;
+                obj.SetActive(true);
+            } 
         }
+       
     }
 }

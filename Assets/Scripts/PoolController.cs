@@ -16,14 +16,14 @@ public class PoolController : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    public void CreatePool()
     {
         for (int i = 0; i < NumberOfObjects; i++)
         {
-           var _sphere= Instantiate(FallingSphere, transform);
-           _queue.Enqueue(_sphere);
-           var _box= Instantiate(FallingBox, transform);
-           _queue.Enqueue(_box);
+            var _sphere= Instantiate(FallingSphere, transform);
+            _queue.Enqueue(_sphere);
+            var _box= Instantiate(FallingBox, transform);
+            _queue.Enqueue(_box);
         }
     }
 
@@ -41,5 +41,15 @@ public class PoolController : MonoBehaviour
     {
         _queue.Enqueue(_obj);
         _obj.transform.position=Vector3.zero;
+    }
+
+    public void Hide()
+    {
+        var pooledObjects = GetComponentsInChildren(typeof(Transform));
+        for (int i = 1; i < pooledObjects.Length; i++)
+        {
+            pooledObjects[i].gameObject.SetActive(false);
+        }
+       
     }
 }

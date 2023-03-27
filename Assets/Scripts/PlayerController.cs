@@ -18,16 +18,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float velocity = inputX * _speed;
-        transform.Translate(Vector2.right*velocity*Time.deltaTime);
-        if (transform.position.x < -_screenHalfWidth)
+        if (GameController.Instance.isGameActive)
         {
-            transform.position = new Vector2(_screenHalfWidth, transform.position.y);
-        }
-        if (transform.position.x >_screenHalfWidth)
-        {
-            transform.position = new Vector2(-_screenHalfWidth, transform.position.y);
+            float inputX = Input.GetAxisRaw("Horizontal");
+            float velocity = inputX * _speed;
+            transform.Translate(Vector2.right * velocity * Time.deltaTime);
+            if (transform.position.x < -_screenHalfWidth)
+            {
+                transform.position = new Vector2(_screenHalfWidth, transform.position.y);
+            }
+
+            if (transform.position.x > _screenHalfWidth)
+            {
+                transform.position = new Vector2(-_screenHalfWidth, transform.position.y);
+            }
         }
     }
 
@@ -35,7 +39,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag=="Block")
         {
-            Destroy(gameObject);
+            GameController.Instance.SetGameState(false);
+            gameObject.SetActive(false);
         }
     }
 }

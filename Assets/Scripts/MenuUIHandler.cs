@@ -30,6 +30,7 @@ public class MenuUIHandler : MonoBehaviour
         MainManager.Instance.ObstacleColor = color;
         Obstacle1.color = ColorPickerObstacle.SelectedColor;
         Obstacle2.color = ColorPickerObstacle.SelectedColor;
+        PoolController.Instance.ChangeColor(color);
     }
     private void Start()
     {

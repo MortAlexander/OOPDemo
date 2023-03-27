@@ -8,7 +8,7 @@ public static class Difficulty
    private static float levelStartTime;
    public static float GetDificultyPercent()
    {
-      return Mathf.Clamp01(levelStartTime / SecondsToMaxDificulty);
+      return Mathf.Clamp01((Time.time-levelStartTime) / SecondsToMaxDificulty);
    }
 
    public static void SetLevelStartTime()

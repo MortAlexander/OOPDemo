@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
         topScoreParent.SetActive(true);
         endTime=Time.time;
         var result = (int) (endTime - startTime);
-        timeSurvivedText.text =" Score : "+result ;
+        timeSurvivedText.text =""+result ;
         DataContainer.Instance.CheckGameResult(result);
         UpdateStartTopScore();
     }
@@ -73,9 +73,16 @@ public class GameController : MonoBehaviour
        SetGameState(true);
     }
 
+    public void ToMenu()
+    {
+        _endScreen.SetActive(false);
+        _startScreen.SetActive(true);
+        PoolController.Instance.Hide();
+        _player.SetActive(true);
+    }
+
     public void UpdateStartTopScore()
     {
-        Debug.Log("UpdateStartTopScore");
         topScoreParent.SetActive(true);
         topResultText.text = DataContainer.Instance.NameFromJson + " " +
                              DataContainer.Instance.ScoreFromJson;

@@ -10,7 +10,7 @@ public class PoolController : MonoBehaviour
     [SerializeField] private GameObject FallingBox;
     private Queue<GameObject> _queue = new Queue<GameObject>();
     [SerializeField] private int NumberOfObjects;
-
+    private List<GameObject> pooledOjs = new List<GameObject>();
     private void Awake()
     {
         Instance = this;
@@ -24,6 +24,8 @@ public class PoolController : MonoBehaviour
             _queue.Enqueue(_sphere);
             var _box= Instantiate(FallingBox, transform);
             _queue.Enqueue(_box);
+            pooledOjs.Add(_sphere);
+            pooledOjs.Add(_box);
         }
     }
 
@@ -51,5 +53,13 @@ public class PoolController : MonoBehaviour
             pooledObjects[i].gameObject.SetActive(false);
         }
        
+    }
+
+    public void ChangeColor(Color c)
+    {
+        foreach (var VARIABLE in pooledOjs)
+        {
+            VARIABLE.GetComponent<SpriteRenderer>().color = c;
+        }
     }
 }
